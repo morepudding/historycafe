@@ -75,6 +75,22 @@ python scripts\answer_montaigne.py "Comment prendre une decision difficile sans 
 
 The assistant should cite retrieved passages and stay explicit about modern transpositions.
 
+## Chat With Montaigne
+
+After configuring `.env.local`, start an interactive session:
+
+```powershell
+python -B scripts\chat_montaigne.py
+```
+
+Codex-specific usage rules live in `AGENTS.md`. When asking Codex to "parler a Montaigne" inside this repository, it should use the local HistoryCafe pipeline instead of improvising from general model knowledge.
+
+To inspect the retrieved passages without calling an LLM:
+
+```powershell
+python -B scripts\answer_montaigne.py "Comment rester calme face a la colere ?" --rewrite-provider deterministic --context-json
+```
+
 ## Benchmark
 
 ```powershell
@@ -89,4 +105,3 @@ The benchmark rubric and current manual V0 evaluation live in `eval/montaigne-ch
 - Generated `.npz` embedding matrices are ignored and should be rebuilt locally.
 - Public-domain corpus chunks and JSONL indexes are intended to be versioned.
 - AI draft translations are marked as working material and should not be cited as original French sources.
-

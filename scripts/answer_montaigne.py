@@ -19,6 +19,9 @@ from search_corpus import snippet
 from vector_common import DEFAULT_INDEX, load_jsonl
 
 
+DEFAULT_AGENT_PROFILE = ROOT / "authors" / "montaigne" / "style" / "agent-profile.md"
+
+
 ANSWER_SYSTEM_PROMPT = """Tu es une IA de Montaigne a notre epoque.
 
 Position:
@@ -42,6 +45,12 @@ Style:
 - Ne t'excuse pas de transposer un sujet moderne.
 - Maximum 5 paragraphes courts.
 """
+
+
+def load_agent_profile(path: Path = DEFAULT_AGENT_PROFILE) -> str:
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8").strip()
 
 
 def compact_passage(record: dict[str, Any], ranking: dict[str, Any], index: int, query: str) -> dict[str, Any]:
@@ -127,6 +136,7 @@ def append_sources(answer: str, passages: list[dict[str, Any]]) -> str:
 def build_answer_prompt(question: str, rewrite: dict[str, Any], passages: list[dict[str, Any]]) -> str:
     payload = {
         "question_utilisateur": question,
+        "profil_agent": load_agent_profile(),
         "interpretation_moderne": {
             "modern_explanation": rewrite.get("modern_explanation"),
             "human_situation": rewrite.get("human_situation"),
@@ -182,13 +192,12 @@ def call_answer_llm(prompt: str, *, model: str | None = None) -> str:
     return str(response_payload["choices"][0]["message"]["content"]).strip()
 
 
-def generate_answer(
+def prepare_answer_context(
     question: str,
     *,
     index_path: Path = DEFAULT_INDEX,
     rewrite_provider: str = "llm",
     rewrite_model: str | None = None,
-    answer_model: str | None = None,
     passage_limit: int = 5,
     candidate_limit: int = 40,
     pool_per_query: int = 24,
@@ -209,12 +218,42 @@ def generate_answer(
         for index, (score, record, ranking) in enumerate(reranked, start=1)
     ]
     prompt = build_answer_prompt(question, rewrite, passages)
-    raw_answer = call_answer_llm(prompt, model=answer_model)
-    answer = append_sources(raw_answer, passages)
     return {
         "question": question,
         "rewrite": rewrite,
         "passages": passages,
+        "prompt": prompt,
+    }
+
+
+def generate_answer(
+    question: str,
+    *,
+    index_path: Path = DEFAULT_INDEX,
+    rewrite_provider: str = "llm",
+    rewrite_model: str | None = None,
+    answer_model: str | None = None,
+    passage_limit: int = 5,
+    candidate_limit: int = 40,
+    pool_per_query: int = 24,
+) -> dict[str, Any]:
+    context = prepare_answer_context(
+        question,
+        index_path=index_path,
+        rewrite_provider=rewrite_provider,
+        rewrite_model=rewrite_model,
+        passage_limit=passage_limit,
+        candidate_limit=candidate_limit,
+        pool_per_query=pool_per_query,
+    )
+    passages = context["passages"]
+    prompt = context["prompt"]
+    raw_answer = call_answer_llm(prompt, model=answer_model)
+    answer = append_sources(raw_answer, passages)
+    return {
+        "question": context["question"],
+        "rewrite": context["rewrite"],
+        "passages": context["passages"],
         "answer": answer,
         "raw_answer": raw_answer,
     }
@@ -233,7 +272,21 @@ def main() -> None:
     parser.add_argument("--candidate-limit", type=int, default=40)
     parser.add_argument("--pool-per-query", type=int, default=24)
     parser.add_argument("--json", action="store_true")
+    parser.add_argument("--context-json", action="store_true", help="Print retrieval context and prompt without calling an LLM.")
     args = parser.parse_args()
+
+    if args.context_json:
+        context = prepare_answer_context(
+            args.question,
+            index_path=Path(args.index),
+            rewrite_provider=args.rewrite_provider,
+            rewrite_model=args.rewrite_model,
+            passage_limit=args.passage_limit,
+            candidate_limit=args.candidate_limit,
+            pool_per_query=args.pool_per_query,
+        )
+        print(json.dumps(context, ensure_ascii=False, indent=2))
+        return
 
     result = generate_answer(
         args.question,
