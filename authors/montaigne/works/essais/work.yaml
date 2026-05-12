@@ -1,0 +1,14 @@
+id: essais
+author_id: montaigne
+title: Essais
+type: primary_text
+genre: essai
+original_publication_years:
+  - 1580
+  - 1588
+  - 1595
+language: fr
+notes:
+  - Oeuvre decoupee en fragments courts pour retrieval IA.
+  - Le premier import utilise la traduction en langage moderne du general Michaud.
+

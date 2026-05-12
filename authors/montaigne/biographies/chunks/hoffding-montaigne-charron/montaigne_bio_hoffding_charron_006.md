@@ -1,0 +1,20 @@
+---
+chunk_id: montaigne_bio_hoffding_charron_006
+author_id: montaigne
+work_id: biographies
+source_id: wikisource_hoffding_montaigne_charron
+source_name: "Wikisource"
+source_url: "https://fr.wikisource.org/wiki/Histoire_de_la_philosophie_moderne/Livre_1/Chapitre_4"
+source_file: "wikisource-hoffding-montaigne-charron.parse.json"
+rights: public_domain
+language: fr
+text_type: secondary_text
+title: "Michel de Montaigne et Pierre Charron"
+chunk_index: 6
+chunk_count: 8
+word_count: 646
+themes: []
+---
+Comment naît ce « patron au dedans » et quels rapports il a avec la « forme maîtresse », c’est ce que Montaigne n’explique pas davantage. Il laisse ainsi à la pensée ultérieure un problème important. Mais de même qu’il ne préconisait l’ignorance et l’abandon calme à la nature qu’à la condition d’avoir une tête bien faite, de même dans le domaine pratique, ainsi qu’il ressort clairement de ses paroles, il ne pouvait être dans son idée de laisser simplement faire la nature. La nature individuelle ne se développe que si la réflexion et la volonté participent à sa forme particulière, et l’attention et le travail seuls peuvent préserver la « forme maîtresse » des altérations. Montaigne a conscience de n’être pas un héros de la volonté. S’il a quelque vertu, dit-il, c’est plutôt la faveur de la fortune que l’œuvre de sa volonté. Il est reconnaissant du fait qu’il appartient à une bonne race (une race fameuse en proud’hommie) et qu’il a reçu une bonne éducation. Il a une aversion naturelle pour la plupart des vices (particulièrement la cruauté), mais il ne veut pas garantir ce qui serait advenu de lui, s’il n’avait possédé une aussi heureuse nature ; il ne peut supporter les luttes et les dissensions intestines. À la vérité, la raison vise à la préséance dans son âme ; mais souvent elle a assez à faire pour ne pas se laisser mutiler par les appétits qu’elle ne peut pas toujours réformer. Et pourtant, c’était sa conviction que le plaisir suprême est lié à la vertu ; le combat ne peut être qu’une transition. Les basses jouissances sont momentanées et fugitives et entraînent facilement le repentir. La satisfaction complète, également éloignée de la jouissance sensuelle et de la lutte accablante pour observer les injonctions de la raison, ne peut se trouver que là où précisément la nature la plus intime de l’âme s’exprime dans les bonnes actions. Développer en soi une nature susceptible de faire disparaître toute occasion de conflits intérieurs, voilà pour Montaigne l’idéal. Il sait qu’il ne se tient qu’au troisième rang, qu’il n’est ni de ceux qui luttent vaillamment, ni de ceux qui sont dispensés du combat. Mais il admire « la hauteur des âmes héroïques ». Sa propre faiblesse ne le rend pas aveugle pour la force d’autrui. Tout en rampant par terre, il peut voir leur haute envolée. Et il ne s’estime pas peu d’avoir conservé son jugement moral dans un siècle où la vertu ne semble être autre chose qu’un « jargon du collège. » (I, 19, 36 — II, 11 — III, 13).
+
+Le langage que tient Montaigne en faveur de la notion de nature a un caractère antique. Mais chez lui cette notion dépasse la forme bornée qu’elle a chez les penseurs grecs. Par sa liaison si étroite avec la notion d’individualité elle est étendue jusqu’à l’infini. Si Montaigne oppose la nature aux artifices des hommes, c’est d’une part que ceux-ci établissent certaines formes comme seules justifiées, méconnaissant ainsi la profusion de la nature, que d’autre part ils violent l’individualité singulière, qui possède le même droit de se développer que toute autre. L’avenir était ouvert aux deux idées d’infini et d’individualité. Et le doute de Montaigne, sa grande faculté d’observation et son érudition d’humaniste lui donnèrent la liberté d’esprit et l’étoffe voulues pour inculquer le sens de ces notions. Son doute, qui est proprement une affirmation du droit de penser, le porta à franchir les barrières artificielles, et sa vaste expérience et son érudition lui enseignèrent ce que l’on peut trouver au delà de ces barrières : de nouvelles formes individuelles, par lesquelles s’exprime une même nature, unique et infinie.

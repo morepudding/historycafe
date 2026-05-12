@@ -1,0 +1,10 @@
+{{TextQuality|Textes validés}}
+<pages index="La Boétie - Discours de la servitude volontaire.djvu" from=187 to=210 header=1 current="" />
+
+<references />
+{{T4|NOTES}}
+
+
+<div style="font-size:90%"><pages index="La Boétie - Discours de la servitude volontaire.djvu" from=219 to=220 fromsection=s1 header_type=empty /></div>
+
+[[Catégorie:Étienne de La Boétie]]

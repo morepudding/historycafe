@@ -1,0 +1,24 @@
+.env
+.env.*
+!.env.example
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+.venv/
+venv/
+env/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+*.log
+
+# Generated embedding matrices can be rebuilt from the corpus index.
+authors/*/indexes/*.npz
+authors/*/indexes/*-test.json
+
+# Local benchmark outputs can contain provider/model-specific generations.
+eval/*-results.jsonl

@@ -1,0 +1,13 @@
+id: journal-de-voyage
+author_id: montaigne
+title: Journal du voyage de Montaigne
+type: primary_text
+genre: journal de voyage
+language: fr
+original_period:
+  - 1580
+  - 1581
+notes:
+  - Import initial depuis Wikisource.
+  - Le texte conserve des formes anciennes, notamment le s long.
+

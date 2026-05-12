@@ -1,0 +1,20 @@
+id: wikisource_en_letters_1877
+work_id: correspondence
+source_name: Wikisource EN
+source_type: public_domain_english_translation
+title: The Letters of Montaigne
+source_url: https://en.wikisource.org/wiki/The_Essays_of_Montaigne/The_Letters_of_Montaigne
+rights: public_domain
+language: en
+original_language: fr
+translation_publication_year: 1877
+raw_file: ../raw/wikisource-en-letters.parse.json
+generated_chunks_dir: ../chunks-en
+generated_french_draft_dir: ../chunks-fr-ai-draft
+text_type: letter_translation
+letter_count: 16
+notes:
+  - Ces lettres sont utiles pour la personnalite, les situations et la biographie intellectuelle.
+  - Elles ne doivent pas etre utilisees comme source du style francais exact de Montaigne.
+  - Une couche francaise de travail a ete ajoutee dans chunks-fr-ai-draft pour les lettres II a XVI.
+  - La lettre I est deja disponible en francais original dans chunks/lettre-mort-la-boetie.

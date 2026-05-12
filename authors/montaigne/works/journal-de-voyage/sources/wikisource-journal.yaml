@@ -1,0 +1,15 @@
+id: wikisource_journal_voyage
+work_id: journal-de-voyage
+source_name: Wikisource
+source_type: rendered_transcription
+source_url: https://fr.wikisource.org/wiki/Journal_du_voyage_de_Montaigne/Texte_du_journal
+rights: public_domain
+raw_file: ../raw/wikisource-journal.parse.json
+generated_chunks_dir: ../chunks
+text_used:
+  - original_french_and_italian_rendered_by_wikisource
+editorial_notes_included: true
+notes:
+  - Source importee via l'API MediaWiki parse de Wikisource.
+  - A nettoyer plus finement plus tard si l'on veut separer notes, variantes et texte principal.
+

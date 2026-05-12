@@ -1,0 +1,30 @@
+sources:
+  - id: wikisource_villemain_eloge_montaigne
+    title: Eloge de Montaigne
+    author: Abel-Francois Villemain
+    source_name: Wikisource
+    source_url: https://fr.wikisource.org/wiki/Discours_et_m%C3%A9langes_litt%C3%A9raires/%C3%89loge_de_Montaigne
+    text_type: secondary_text
+    rights: public_domain
+    raw_file: ../raw/wikisource-villemain-eloge.parse.json
+    generated_chunks_dir: ../chunks/villemain-eloge
+
+  - id: wikisource_hoffding_montaigne_charron
+    title: Michel de Montaigne et Pierre Charron
+    author: Harald Hoffding
+    source_name: Wikisource
+    source_url: https://fr.wikisource.org/wiki/Histoire_de_la_philosophie_moderne/Livre_1/Chapitre_4
+    text_type: secondary_text
+    rights: public_domain
+    raw_file: ../raw/wikisource-hoffding-montaigne-charron.parse.json
+    generated_chunks_dir: ../chunks/hoffding-montaigne-charron
+
+  - id: wikisource_bouillet_montaigne_notice
+    title: Notice Montaigne du dictionnaire Bouillet-Chassang
+    source_name: Wikisource
+    source_url: https://fr.wikisource.org/wiki/Dictionnaire_universel_d%E2%80%99histoire_et_de_g%C3%A9ographie_Bouillet_Chassang/Lettre_M-MILWAUKEE
+    text_type: reference_notice
+    rights: public_domain
+    raw_file: ../raw/wikisource-bouillet-m-page.parse.json
+    generated_chunks_dir: ../chunks/bouillet-notice
+

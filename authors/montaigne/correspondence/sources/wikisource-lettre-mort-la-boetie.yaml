@@ -1,0 +1,14 @@
+id: wikisource_lettre_mort_la_boetie
+work_id: correspondence
+source_name: Wikisource
+source_type: rendered_transcription
+title: Lettre de Montaigne sur la mort de La Boetie
+source_url: https://fr.wikisource.org/wiki/Discours_de_la_servitude_volontaire/%C3%89dition_1922/Lettre_de_Montaigne
+rights: public_domain
+raw_file: ../raw/wikisource-lettre-montaigne-la-boetie.parse.json
+generated_chunks_dir: ../chunks/lettre-mort-la-boetie
+text_type: letter
+notes:
+  - Lettre majeure pour comprendre l'amitie Montaigne-La Boetie.
+  - Importee depuis une edition Wikisource du Discours de la servitude volontaire.
+

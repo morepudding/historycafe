@@ -1,0 +1,16 @@
+id: montaigne
+name: Michel de Montaigne
+birth_year: 1533
+death_year: 1592
+language: fr
+period: Renaissance
+country: France
+primary_genres:
+  - essai
+  - journal de voyage
+rights:
+  original_texts: public_domain
+notes:
+  - Premier auteur du projet HistoryCafe.
+  - Le corpus initial utilise une transcription Project Gutenberg de l'edition Michaud.
+

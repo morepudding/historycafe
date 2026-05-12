@@ -1,0 +1,8 @@
+{
+  "dimensions": 2048,
+  "index_path": "C:/RomainOpen/historycafe/authors/montaigne/indexes/corpus-index.jsonl",
+  "model": "nvidia/llama-nemotron-embed-vl-1b-v2:free",
+  "npz_path": "authors/montaigne/indexes/corpus-embeddings-openrouter-nemotron.npz",
+  "provider": "openrouter",
+  "record_count": 1344
+}

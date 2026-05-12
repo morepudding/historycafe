@@ -1,0 +1,25 @@
+{
+  "by_corpus_role": {
+    "context": 29,
+    "editorial_context": 1,
+    "primary": 1260,
+    "supporting_translation": 54
+  },
+  "by_source_quality": {
+    "ai_draft_back_translation": 22,
+    "public_domain_editorial_notes": 1,
+    "public_domain_english_translation": 32,
+    "public_domain_modern_french_translation": 1124,
+    "public_domain_primary": 136,
+    "public_domain_secondary": 29
+  },
+  "by_work_id": {
+    "biographies": 29,
+    "correspondence": 64,
+    "essais": 1124,
+    "journal-de-voyage": 127
+  },
+  "index_path": "authors/montaigne/indexes/corpus-index.jsonl",
+  "record_count": 1344,
+  "total_words": 693882
+}

@@ -1,0 +1,18 @@
+---
+chunk_id: montaigne_bio_hoffding_charron_004
+author_id: montaigne
+work_id: biographies
+source_id: wikisource_hoffding_montaigne_charron
+source_name: "Wikisource"
+source_url: "https://fr.wikisource.org/wiki/Histoire_de_la_philosophie_moderne/Livre_1/Chapitre_4"
+source_file: "wikisource-hoffding-montaigne-charron.parse.json"
+rights: public_domain
+language: fr
+text_type: secondary_text
+title: "Michel de Montaigne et Pierre Charron"
+chunk_index: 4
+chunk_count: 8
+word_count: 565
+themes: []
+---
+Non content de réfuter le savoir ampoulé, Montaigne préconise franchement l’ignorance, parce qu’elle donne libre jeu à la nature et que la réflexion et l’art ne viennent pas empêcher « notre grande et puissante mère Nature » de nous guider. Par ignorance, il n’entend pas le vide grossier, sans pensée ; mais l’ignorance qui naît de l’intelligence des bornes de notre être. Ce n’est qu’en poussant une porte que nous pouvons nous vaincre qu’elle est fermée, et non en restant passivement devant elle. Pour « une teste bien faicte » seule l’ignorance est un bon et salutaire oreiller. La notion de nature a pour Montaigne son importance en grand comme en petit. S’agit-il de maladies par exemple, il ne veut rien savoir des médecins, qui ne font que gaspiller la nature, dont ils empêchent le développement régulier. Comme toute chose, chaque maladie a sa période de développement et de conclusion déterminée, et toute intervention est vaine. On doit laisser faire la nature ; elle s’y entend mieux que nous. Il faut s’accommoder de l’ordre de la nature. « Nostre vie est composée, comme l’harmonie du monde, de choses contraires, aussi divers tons », qui tous font partie du grand ensemble — maladie et mort aussi bien que santé et vie. — En matière d’éducation il importe également de laisser libre cours à la nature. On ne doit inculquer de connaissances que pour développer le sentiment et le caractère, et l’expérience de la vie est la meilleure école de mattrise de soi. — À vrai dire, il réfute absolument son scepticisme en arrivant à la notion de nature. L’unique façon, dit-il, de se garder de mesurer les choses avec une fausse mesure consiste à avoir toujours sous les yeux « nostre mère nature en son entière majesté » : elle nous montre une diversité générale et continue, où nous découvrons que nous, et tout ce que nous appelons grand, nous ne sommes qu’un point imperceptible3. Cela nous empêchera de tracer des limites arbitraires et étroites. Par là naît la tolérance. Comme nous l’avons vu, Montaigne aboutit à ce résultat en matière religieuse, que la divinité inconnue doit être adorée par les différentes nations sous autant de formes différentes. — Et par cette observation Montaigne fonde ses opinions conservatrices. Je suis dégoûté de la nouveauté, dit-il, sous quelque forme qu’elle se présente. Non pas que les lois en vigueur soient toujours raisonnables. Ce qui fait la valeur des lois, ce n’est pas qu’elles sont justes, mais qu’elles sont lois : c’est le fondement mystique de leur auctorité ! L’habitude est la reine du monde. Quand la conscience est habituée à respecter une chose, elle s’y sent attachée et ne peut s’en séparer sans douleur. À la vérité, le sage doit affranchir son âme, afin de juger les choses sans parti pris ; mais à l’extérieur, il doit observer les lois et les mœurs en vigueur. Se faire fort de les remplacer en mieux, c’est de l’orgueil insensé. Sans l’exprimer absolument, la suite des idées de Montaigne semble impliquer que la nature se manifeste par les mœurs et les coutumes établies, et ainsi ses opinions conservatrices rentrent dans sa foi en la nature, bien que — d’après sa propre conception la nouveauté doive nécessairement être tout aussi « naturelle » que le passé.

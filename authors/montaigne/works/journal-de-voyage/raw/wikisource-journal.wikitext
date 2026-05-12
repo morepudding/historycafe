@@ -1,0 +1,7 @@
+{{Index|Montaigne - Journal du Voyage en Italie, 1774, vol1.djvu}}
+{{chapitre|[[Auteur:Michel de Montaigne|Michel de Montaigne]]|'''[[Journal du voyage de Montaigne|Journal de voyage]]'''|Texte original en français et italien|}}
+
+<pages index="Montaigne - Journal du Voyage en Italie, 1774, vol1.djvu" from=123 to=448  />
+<pages index="Montaigne - Journal du Voyage en Italie, 1775, vol2.djvu" from=9 to=185/>
+<pages index="Montaigne - Journal du Voyage en Italie, 1775, vol2.djvu" from=186 to=592 step=2/>
+<pages index="Montaigne - Journal du Voyage en Italie, 1775, vol2.djvu" from=594 to=607 />

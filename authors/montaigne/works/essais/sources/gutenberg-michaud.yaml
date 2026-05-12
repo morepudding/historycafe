@@ -1,0 +1,30 @@
+id: gutenberg_michaud_essais
+work_id: essais
+source_name: Project Gutenberg
+source_type: transcription
+edition_title: Essais de Montaigne (self-edition)
+editor_translator: General Michaud
+publication_year: 1909
+language: fr
+rights: public_domain
+license_url: https://www.gutenberg.org/policy/license.html
+source_urls:
+  - https://www.gutenberg.org/ebooks/48529
+  - https://www.gutenberg.org/ebooks/49168
+  - https://www.gutenberg.org/ebooks/58801
+  - https://www.gutenberg.org/ebooks/58706
+text_used:
+  - modern_french_translation
+editorial_notes_included: false
+raw_files:
+  - ../raw/gutenberg-48529.txt
+  - ../raw/gutenberg-49168.txt
+  - ../raw/gutenberg-58801.txt
+  - ../raw/gutenberg-58706.txt
+generated_chunks_dir: ../chunks-michaud-modern
+notes:
+  - Les volumes I a III contiennent le texte utile pour le premier chunking.
+  - Le volume IV contient surtout notice, sommaires, variantes, notes et glossaire.
+  - Le dossier chunks-michaud-modern est le dossier valide pour ce premier import.
+  - Le dossier chunks peut contenir une generation de test incomplete et doit etre ignore.
+
