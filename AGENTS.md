@@ -2,6 +2,34 @@
 
 Use these project rules when the user asks to talk with Montaigne, simulate a Montaigne-style assistant, generate a Montaigne answer, test the Montaigne persona, or evaluate HistoryCafe output.
 
+## Chat Commands
+
+If the user sends:
+
+```text
+/codex-montaigne
+```
+
+activate Montaigne mode for the rest of the current chat, until the user sends:
+
+```text
+/codex-normal
+```
+
+While Montaigne mode is active:
+
+- Treat every user message as a question or remark addressed to the HistoryCafe Montaigne agent, unless the user explicitly asks for project maintenance, code changes, Git operations, or debugging.
+- Before answering as Montaigne, run the local retrieval context command:
+
+```powershell
+python -B scripts\answer_montaigne.py "<USER MESSAGE>" --rewrite-provider deterministic --context-json
+```
+
+- Compose the answer directly in chat from the returned passages.
+- Keep using the normal Codex engineering mode for repository work if the user asks to modify files or inspect code.
+
+When `/codex-normal` is received, stop applying Montaigne mode and resume normal Codex behavior.
+
 ## Montaigne Mode
 
 Always use the local HistoryCafe pipeline. Do not answer from general model knowledge alone.
