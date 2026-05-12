@@ -13,10 +13,14 @@ from rerank_contextual import rerank_results
 from rewrite_query_montaigne import (
     ROOT,
     load_dotenv_if_present,
+    rewrite_query,
 )
 from search_contextual import contextual_bm25_search
+from search_corpus import bm25_search
 from search_corpus import snippet
-from vector_common import DEFAULT_INDEX, load_jsonl
+from search_hybrid import reciprocal_rank_fusion
+from search_vector import load_vector_index, vector_search
+from vector_common import DEFAULT_INDEX, DEFAULT_VECTOR_META, DEFAULT_VECTOR_NPZ, load_jsonl
 
 
 DEFAULT_AGENT_PROFILE = ROOT / "authors" / "montaigne" / "style" / "agent-profile.md"
@@ -152,6 +156,70 @@ def build_answer_prompt(question: str, rewrite: dict[str, Any], passages: list[d
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
+def contextual_hybrid_search(
+    records: list[dict[str, Any]],
+    question: str,
+    *,
+    vectors_path: Path = DEFAULT_VECTOR_NPZ,
+    meta_path: Path = DEFAULT_VECTOR_META,
+    limit: int = 40,
+    pool_per_query: int = 24,
+    query_limit: int = 7,
+    rewrite_provider: str = "deterministic",
+    rewrite_model: str | None = None,
+    bm25_weight: float = 1.25,
+    vector_weight: float = 1.0,
+) -> tuple[dict[str, Any], list[tuple[float, dict[str, Any], dict[str, Any]]]]:
+    rewrite = rewrite_query(question, provider=rewrite_provider, query_limit=query_limit, model=rewrite_model)
+    matrix, chunk_ids, metadata = load_vector_index(vectors_path, meta_path)
+
+    scores: dict[str, float] = {}
+    records_by_id: dict[str, dict[str, Any]] = {}
+    details: dict[str, dict[str, Any]] = {}
+
+    for query_index, query in enumerate(rewrite.queries, start=1):
+        query_weight = 1.0 / query_index
+        bm25_results = bm25_search(records, query, pool_per_query)
+        vector_results = vector_search(records, matrix, chunk_ids, query, metadata, pool_per_query)
+        fused = reciprocal_rank_fusion(
+            bm25_results,
+            vector_results,
+            bm25_weight=bm25_weight,
+            vector_weight=vector_weight,
+        )
+
+        for rank, (fused_score, record, fused_detail) in enumerate(fused[:pool_per_query], start=1):
+            chunk_id = str(record["chunk_id"])
+            contribution = query_weight * (1.0 / (rank + 8)) * max(fused_score * 100.0, 0.01)
+            scores[chunk_id] = scores.get(chunk_id, 0.0) + contribution
+            records_by_id[chunk_id] = record
+            detail = details.setdefault(chunk_id, {"matched_queries": [], "retrieval_mode": "contextual-hybrid"})
+            detail["vector_provider"] = metadata.get("provider")
+            detail["vector_model"] = metadata.get("model")
+            detail["matched_queries"].append(
+                {
+                    "query": query,
+                    "query_index": query_index,
+                    "rank": rank,
+                    "bm25_rank": fused_detail.get("bm25_rank"),
+                    "bm25_score": fused_detail.get("bm25_score", 0.0),
+                    "vector_rank": fused_detail.get("vector_rank"),
+                    "vector_score": fused_detail.get("vector_score", 0.0),
+                    "vector_raw_score": fused_detail.get("vector_raw_score", 0.0),
+                    "fused_score": fused_score,
+                }
+            )
+
+    results = [(score, records_by_id[chunk_id], details[chunk_id]) for chunk_id, score in scores.items()]
+    results.sort(key=lambda item: item[0], reverse=True)
+
+    payload = rewrite.to_dict()
+    payload["retrieval_mode"] = "contextual-hybrid"
+    payload["vector_provider"] = metadata.get("provider")
+    payload["vector_model"] = metadata.get("model")
+    return payload, results[:limit]
+
+
 def call_answer_llm(prompt: str, *, model: str | None = None) -> str:
     load_dotenv_if_present(ROOT / ".env.local")
     import os
@@ -198,19 +266,34 @@ def prepare_answer_context(
     index_path: Path = DEFAULT_INDEX,
     rewrite_provider: str = "llm",
     rewrite_model: str | None = None,
+    retrieval_mode: str = "contextual-hybrid",
+    vectors_path: Path = DEFAULT_VECTOR_NPZ,
+    meta_path: Path = DEFAULT_VECTOR_META,
     passage_limit: int = 5,
     candidate_limit: int = 40,
     pool_per_query: int = 24,
 ) -> dict[str, Any]:
     records = load_jsonl(index_path)
-    rewrite, contextual_results = contextual_bm25_search(
-        records,
-        question,
-        limit=candidate_limit,
-        pool_per_query=pool_per_query,
-        rewrite_provider=rewrite_provider,
-        rewrite_model=rewrite_model,
-    )
+    if retrieval_mode == "contextual-hybrid":
+        rewrite, contextual_results = contextual_hybrid_search(
+            records,
+            question,
+            vectors_path=vectors_path,
+            meta_path=meta_path,
+            limit=candidate_limit,
+            pool_per_query=pool_per_query,
+            rewrite_provider=rewrite_provider,
+            rewrite_model=rewrite_model,
+        )
+    else:
+        rewrite, contextual_results = contextual_bm25_search(
+            records,
+            question,
+            limit=candidate_limit,
+            pool_per_query=pool_per_query,
+            rewrite_provider=rewrite_provider,
+            rewrite_model=rewrite_model,
+        )
     reranked = rerank_results(rewrite, contextual_results, limit=passage_limit)
     passage_query = " ".join(str(term) for term in rewrite.get("bridge_terms", []))
     passages = [
@@ -233,6 +316,9 @@ def generate_answer(
     rewrite_provider: str = "llm",
     rewrite_model: str | None = None,
     answer_model: str | None = None,
+    retrieval_mode: str = "contextual-hybrid",
+    vectors_path: Path = DEFAULT_VECTOR_NPZ,
+    meta_path: Path = DEFAULT_VECTOR_META,
     passage_limit: int = 5,
     candidate_limit: int = 40,
     pool_per_query: int = 24,
@@ -242,6 +328,9 @@ def generate_answer(
         index_path=index_path,
         rewrite_provider=rewrite_provider,
         rewrite_model=rewrite_model,
+        retrieval_mode=retrieval_mode,
+        vectors_path=vectors_path,
+        meta_path=meta_path,
         passage_limit=passage_limit,
         candidate_limit=candidate_limit,
         pool_per_query=pool_per_query,
@@ -268,6 +357,9 @@ def main() -> None:
     parser.add_argument("--rewrite-provider", choices=["deterministic", "llm"], default="llm")
     parser.add_argument("--rewrite-model", default=None)
     parser.add_argument("--answer-model", default=None)
+    parser.add_argument("--retrieval-mode", choices=["contextual-hybrid", "contextual-bm25"], default="contextual-hybrid")
+    parser.add_argument("--vectors", default=str(DEFAULT_VECTOR_NPZ))
+    parser.add_argument("--meta", default=str(DEFAULT_VECTOR_META))
     parser.add_argument("--passage-limit", type=int, default=5)
     parser.add_argument("--candidate-limit", type=int, default=40)
     parser.add_argument("--pool-per-query", type=int, default=24)
@@ -281,6 +373,9 @@ def main() -> None:
             index_path=Path(args.index),
             rewrite_provider=args.rewrite_provider,
             rewrite_model=args.rewrite_model,
+            retrieval_mode=args.retrieval_mode,
+            vectors_path=Path(args.vectors),
+            meta_path=Path(args.meta),
             passage_limit=args.passage_limit,
             candidate_limit=args.candidate_limit,
             pool_per_query=args.pool_per_query,
@@ -294,6 +389,9 @@ def main() -> None:
         rewrite_provider=args.rewrite_provider,
         rewrite_model=args.rewrite_model,
         answer_model=args.answer_model,
+        retrieval_mode=args.retrieval_mode,
+        vectors_path=Path(args.vectors),
+        meta_path=Path(args.meta),
         passage_limit=args.passage_limit,
         candidate_limit=args.candidate_limit,
         pool_per_query=args.pool_per_query,

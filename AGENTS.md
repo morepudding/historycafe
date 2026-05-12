@@ -6,10 +6,24 @@ Use these project rules when the user asks to talk with Montaigne, simulate a Mo
 
 Always use the local HistoryCafe pipeline. Do not answer from general model knowledge alone.
 
-Preferred command:
+Preferred command when Codex is answering inside this conversation:
+
+```powershell
+python -B scripts\answer_montaigne.py "<USER QUESTION>" --rewrite-provider deterministic --context-json
+```
+
+Then compose the final answer in the Codex response using the returned passages and source numbers.
+
+Preferred standalone command when `.env.local` has an LLM API key:
 
 ```powershell
 python -B scripts\answer_montaigne.py "<USER QUESTION>"
+```
+
+This command uses `contextual-hybrid` retrieval by default:
+
+```text
+modern question -> query rewrite -> BM25 + vector search -> reciprocal-rank fusion -> reranking -> sourced answer
 ```
 
 For inspection or debugging:
@@ -23,6 +37,8 @@ To inspect retrieval context without calling an LLM:
 ```powershell
 python -B scripts\answer_montaigne.py "<USER QUESTION>" --rewrite-provider deterministic --context-json
 ```
+
+Use `--retrieval-mode contextual-bm25` only for debugging lexical retrieval. The normal Montaigne mode should keep the default hybrid mode.
 
 For an interactive local session:
 

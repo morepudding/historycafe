@@ -30,6 +30,9 @@ MONTAIGNE_VOCABULARY = [
     "civilite",
     "constance",
     "moderation",
+    "passion",
+    "colere",
+    "conversation",
     "usage",
     "nature",
     "exemple",
@@ -51,6 +54,8 @@ DIRECT_TERM_ALIASES = {
     "apprendre": ["education", "experience", "jugement"],
     "danger": ["prudence", "crainte", "jugement"],
     "dangereux": ["prudence", "crainte", "jugement"],
+    "calme": ["moderation", "constance", "raison", "jugement"],
+    "colere": ["colere", "passion", "moderation", "constance", "raison"],
     "decision": ["jugement", "prudence", "conseil"],
     "decider": ["jugement", "prudence", "conseil"],
     "dignite": ["honneur", "constance"],
@@ -67,6 +72,8 @@ DIRECT_TERM_ALIASES = {
     "reseaux": ["opinion", "parole", "honneur", "coutume"],
     "social": ["cite", "coutume"],
     "societe": ["cite", "coutume"],
+    "stress": ["corps", "ame", "moderation", "prudence"],
+    "travail": ["usage", "occupation", "moderation", "corps"],
     "verite": ["verite", "jugement"],
 }
 

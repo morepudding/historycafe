@@ -73,6 +73,12 @@ python scripts\embed_corpus.py --provider openai --model text-embedding-3-small 
 python scripts\answer_montaigne.py "Comment prendre une decision difficile sans certitude ?"
 ```
 
+By default this uses contextual hybrid retrieval:
+
+```text
+modern question -> query rewrite -> BM25 + vector search -> fusion -> reranking -> sourced answer
+```
+
 The assistant should cite retrieved passages and stay explicit about modern transpositions.
 
 ## Chat With Montaigne
@@ -83,6 +89,8 @@ After configuring `.env.local`, start an interactive session:
 python -B scripts\chat_montaigne.py
 ```
 
+The chat command also defaults to contextual hybrid retrieval over the local vector index.
+
 Codex-specific usage rules live in `AGENTS.md`. When asking Codex to "parler a Montaigne" inside this repository, it should use the local HistoryCafe pipeline instead of improvising from general model knowledge.
 
 To inspect the retrieved passages without calling an LLM:
@@ -90,6 +98,8 @@ To inspect the retrieved passages without calling an LLM:
 ```powershell
 python -B scripts\answer_montaigne.py "Comment rester calme face a la colere ?" --rewrite-provider deterministic --context-json
 ```
+
+This is the preferred mode when Codex itself is composing the final answer in a chat session: Codex uses the returned hybrid retrieval context, then writes the answer here.
 
 ## Benchmark
 
